@@ -1,30 +1,24 @@
 import {useEffect, useState} from "react";
 import './App.css';
 import axios from 'axios';
-//REACT_APP_CLIENT_ID=638167eba6cc437ea6dcc6b82671b53a
-//REACT_APP_AUTHORIZE_URL=https://accounts.spotify.com/authorize
-//REACT_APP_REDIRECT_URL=http://localhost:3000/redirect
+
 function App() {
-    const CLIENT_ID = "638167eba6cc437ea6dcc6b82671b53a"
-    const REDIRECT_URI = "http://localhost:3000"
-    const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
+
+    const {
+        REACT_APP_CLIENT_ID,
+        REACT_APP_AUTHORIZE_URL,
+        REACT_APP_REDIRECT_URL
+    } = process.env;
+
     const RESPONSE_TYPE = "token"
 
     const [token, setToken] = useState("")
     const [searchKey, setSearchKey] = useState("")
     const [artists, setArtists] = useState([])
 
-    // const getToken = () => {
-    //     let urlParams = new URLSearchParams(window.location.hash.replace("#","?"));
-    //     let token = urlParams.get('access_token');
-    // }
-
     useEffect(() => {
         const hash = window.location.hash
         let token = window.localStorage.getItem("token")
-
-        // getToken()
-
 
         if (!token && hash) {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
@@ -71,7 +65,7 @@ function App() {
             <header className="App-header">
                 <h1>Spotify React</h1>
                 {!token ?
-                    <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
+                    <a href={`${REACT_AUTH_ENDPOINT}?client_id=${REACT_CLIENT_ID}&redirect_uri=${REACT_REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
                         to Spotify</a>
                     : <button onClick={logout}>Logout</button>}
 

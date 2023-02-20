@@ -31,7 +31,7 @@ const Dashboard = (props) => {
 
   const loadMore = async (type) => {
     if (isValidSession()) {
-      //const {dispatch, albums, artists, playlist} = props;
+     
       const {dispatch} = props;
       setIsLoading(true);
       switch (type) {
